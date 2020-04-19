@@ -16,8 +16,7 @@
 			var count = 0;
 			var loader = new THREE.FileLoader();
 			var fshader, vshader;
-			loader.load('shaders/vertexShader.vert',
-			// onLoad callback
+			loader.load('shaders/vertexShader.vert',// onLoad callback
 			function (data) {
 						console.log(data); // output the text to the console
 						vshader = data;
@@ -57,18 +56,35 @@
 						colorB: {type: 'vec3', value: new THREE.Color(0x145A32)},
 						colorA: {type: 'vec3', value: new THREE.Color(0x1F618D)}
 	 				};
+	 				let uniforms2 = {
+						colorB: {type: 'vec3', value: new THREE.Color(0x03F8E5)},
+						colorA: {type: 'vec3', value: new THREE.Color(0x078E4F)},
+					    colorC: {type: 'vec3', value: new THREE.Color(0xBD1707)}
+
+	 				};
 
 
 					geometry1 = new THREE.BoxGeometry(1, 1, 1);
+					geometry2 = new THREE.BoxGeometry(1, 1, 1);
+
 					material1 =  new THREE.ShaderMaterial({
 						uniforms: uniforms,
 						fragmentShader: fshader,
               			vertexShader: vshader,
 						precision: "mediump"});
-
-				mesh1 = new THREE.Mesh(geometry1, material1);
-				mesh1.position.x = 2;
-				scene.add(mesh1);
+					material2 =  new THREE.ShaderMaterial({
+						uniforms: uniforms2,
+						fragmentShader: fshader,
+              			vertexShader: vshader,
+              		//	vertexColors: true,
+						precision: "mediump"});
+					
+					mesh1 = new THREE.Mesh(geometry1, material1);
+					mesh2 = new THREE.Mesh(geometry1, material2);
+					mesh1.position.x = 2;
+					mesh2.position.x = -2;
+					scene.add(mesh1);
+					scene.add(mesh2);
 			}	
 		}
 
@@ -93,11 +109,19 @@
   			
   			var cube = new THREE.Mesh( geometry, material );
  			scene.add(cube);
+ 			var material2 = new THREE.MeshPhongMaterial( { color: 0xdddddd, 
+					specular: 0x00ff00, shininess: 30 });
+			var cube2 = new THREE.Mesh( geometry, material2 );
+			cube2.position.x = -5;
+ 			scene.add(cube2);
 
 			// add the light
 			var light = new THREE.PointLight(0xffffff, 1, 1000);
 			light.position.set(10, 10, 20);
 			scene.add(light);
+			var light2 = new THREE.PointLight(0xffffff, 1, 1000);
+			light.position.set(-14, -18, 50);
+			scene.add(light2);
 
 			function animate() {
 				requestAnimationFrame(animate);
