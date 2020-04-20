@@ -15,7 +15,7 @@
 			THREE.Cache.enabled = true;
 			var count = 0;
 			var loader = new THREE.FileLoader();
-			var fshader, vshader;
+			var fshader, vshader,fshader2;
 			loader.load('shaders/vertexShader.vert',// onLoad callback
 			function (data) {
 						console.log(data); // output the text to the console
@@ -48,33 +48,52 @@
 				console.error('An error happened');
 			});
 
+			loader.load('shaders/fragShader2.frag',
+			// onLoad callback
+			function (data) {
+				console.log(data); // output the text to the console
+				fshader2 = data;
+				count += 1;
+				addCoolCube(); // we will write this method
+			},
+			// onProgress callback
+			function (xhr) {
+				console.log((xhr.loaded/xhr.total * 100)+ '% loaded');
+			},
+			// onError callback
+			function (err) {
+				console.error('An error happened');
+			});
+
 			var geometry1, material1, mesh1;
 
 			function addCoolCube() {
-				if(count == 2) {
+				if(count == 3) {
 					let uniforms = {
 						colorB: {type: 'vec3', value: new THREE.Color(0x145A32)},
 						colorA: {type: 'vec3', value: new THREE.Color(0x1F618D)}
 	 				};
 	 				let uniforms2 = {
 						colorB: {type: 'vec3', value: new THREE.Color(0x03F8E5)},
-						colorA: {type: 'vec3', value: new THREE.Color(0x078E4F)},
-					    colorC: {type: 'vec3', value: new THREE.Color(0xBD1707)}
+						colorA: {type: 'vec3', value: new THREE.Color(0xAB1A0C)},
+					    colorC: {type: 'vec3', value: new THREE.Color(0x07E322)},
+					    colorD: {type: 'vec3', value: new THREE.Color(0x6407E3)}
 
 	 				};
 
 
 					geometry1 = new THREE.BoxGeometry(1, 1, 1);
 					geometry2 = new THREE.BoxGeometry(1, 1, 1);
-
+					//cube to the far right
 					material1 =  new THREE.ShaderMaterial({
 						uniforms: uniforms,
 						fragmentShader: fshader,
               			vertexShader: vshader,
 						precision: "mediump"});
+					//cube middle left
 					material2 =  new THREE.ShaderMaterial({
 						uniforms: uniforms2,
-						fragmentShader: fshader,
+						fragmentShader: fshader2,
               			vertexShader: vshader,
               		//	vertexColors: true,
 						precision: "mediump"});
@@ -101,6 +120,7 @@
 			
 			// setup the cube
 			var geometry = new THREE.BoxGeometry();
+			//cube middle right
   			var material = new THREE.MeshToonMaterial( { color: 0x9965EA});
   		  			material.shininess = 80;
   		  			material.specular.r = 0.0;
@@ -109,6 +129,7 @@
   			
   			var cube = new THREE.Mesh( geometry, material );
  			scene.add(cube);
+ 			//cube far left
  			var material2 = new THREE.MeshPhongMaterial( { color: 0xdddddd, 
 					specular: 0x00ff00, shininess: 30 });
 			var cube2 = new THREE.Mesh( geometry, material2 );
