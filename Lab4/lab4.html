@@ -39,10 +39,10 @@
 				cube2.position.x -= 2;
 
 				//third cube
-				var texture2 = THREE.ImageUtils.loadTexture("168.jpg");
-				var normMap2 = THREE.ImageUtils.loadTexture("174_norm.jpg");
-				var material2 = new THREE.MeshPhongMaterial({map: texture2, normalMap: normMap2});
-    			var cube3 = new THREE.Mesh(geometry, material2);
+				var texture4 = THREE.ImageUtils.loadTexture("168.jpg");
+				var normMap4 = THREE.ImageUtils.loadTexture("174_norm.jpg");
+				var material4 = new THREE.MeshPhongMaterial({map: texture4, normalMap: normMap4});
+    			var cube3 = new THREE.Mesh(geometry, material4);
 				scene.add(cube3);
 				cube3.position.x -= 4;
 
@@ -52,10 +52,133 @@
 			light.position.set(10, 10, 10);
 			scene.add(light);
 
+			THREE.Cache.enabled = true;
+			var count = 0;
+			var loader = new THREE.FileLoader();
+			var fshader, vshader;
+
+      	loader.load('shaders/vertexShader.vert',
+      		// onLoad callback
+      		function (data) {
+      			console.log(data); // output the text to the console
+      			vshader = data;
+      			count += 1;
+      			addTextureShaderCube(); // we will write this method
+      		},
+      		// onProgress callback
+      		function (xhr) {
+      			console.log((xhr.loaded/xhr.total * 100)+ '% loaded');
+      		},
+     		// onError callback
+      		function (err) {
+      			console.error('An error happened');
+      		});
+
+			loader.load('shaders/fragmentShader.frag',
+      		// onLoad callback
+      		function (data) {
+      			console.log(data); // output the text to the console
+      			fshader = data;
+      			count += 1;
+      			addTextureShaderCube(); // we will write this method
+      		},
+      		// onProgress callback
+      		function (xhr) {
+      			console.log((xhr.loaded/xhr.total * 100)+ '% loaded');
+      		},
+			// onError callback
+      		function (err) {
+      			console.error('An error happened');
+      		});
+
+      		//texture SHADERS
+
+      		var geometry1, material1, mesh1;
+
+			function addTextureShaderCube() {
+			if(count == 2) {
+			var uniforms = {texture1: { type: "t", value: THREE.ImageUtils.loadTexture("177.jpg")}};
+
+				
+			      		geometry1 = new THREE.BoxGeometry(1, 1, 1);
+			      		material1 =  new THREE.ShaderMaterial({
+			            		uniforms: uniforms,
+			      			fragmentShader: fshader,
+			              		vertexShader: vshader,
+			      			precision: "mediump"});
+
+			      		mesh1 = new THREE.Mesh(geometry1, material1);
+			      		mesh1.position.x = 2;
+			      		scene.add(mesh1);
+			    	}
+			}
+			//second set of shaders for part last part
+			var fshader2, vshader2;
+
+      	loader.load('shaders/vertexShader2.vert',
+      		// onLoad callback
+      		function (data) {
+      			console.log(data); // output the text to the console
+      			vshader2 = data;
+      			count += 1;
+      			addTextureShaderCube2(); // we will write this method
+      		},
+      		// onProgress callback
+      		function (xhr) {
+      			console.log((xhr.loaded/xhr.total * 100)+ '% loaded');
+      		},
+     		// onError callback
+      		function (err) {
+      			console.error('An error happened');
+      		});
+
+			loader.load('shaders/fragmentShader2.frag',
+      		// onLoad callback
+      		function (data) {
+      			console.log(data); // output the text to the console
+      			fshader2 = data;
+      			count += 1;
+      			addTextureShaderCube2(); // we will write this method
+      		},
+      		// onProgress callback
+      		function (xhr) {
+      			console.log((xhr.loaded/xhr.total * 100)+ '% loaded');
+      		},
+			// onError callback
+      		function (err) {
+      			console.error('An error happened');
+      		});
+
+
+function addTextureShaderCube2() {
+			if(count == 4) {
+			var uniforms = {texture1: { type: "t", value: THREE.ImageUtils.loadTexture("176.jpg")}};
+
+				
+			      		geometry5 = new THREE.BoxGeometry(1, 1, 1);
+			      		material5 = new THREE.ShaderMaterial({
+							uniforms: uniforms,
+							vertexShader: vshader2,
+							fragmentShader: fshader2
+							});
+
+			      		mesh1 = new THREE.Mesh(geometry5, material5);
+			      		mesh1.position.x = 4;
+			      		scene.add(mesh1);
+			    	}
+			}
+
+
+
+
+
+
 			var deltaX  = -1;
+			var deltaY = 0;
 			function animate() {
 				if(light.position.x <= -20){
 					deltaX = .2;
+
 				}
 				else if(light.position.x >20.0){
 					deltaX = -.2;
