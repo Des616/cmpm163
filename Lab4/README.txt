@@ -9,3 +9,4 @@ The 4th cube is the first custom shader, nothing too special.
 The 5th cube is the final part iwth a tiling effect on top of it. Honestly, this thigns a mess, I just messed around with all sorts of operations until I got something that looked tiled. I would love some more resources on how to solve this, because i was lost the whole time.
 I tried using sin, cos, to get stuff to loop, but that wasnt working out as I envisioned, so really I just tried different operations from the GLSL functions that somebody linked in discord till I got something to resemble the tiled effect.
 
+Video of cubes:: https://drive.google.com/open?id=1gkTP3Eu7QPKlZ9rpdxypiufdyorVbFjj
