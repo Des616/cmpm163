@@ -1,0 +1,4 @@
+I chose to do Part 1, the unity lab.  Here is the link https://drive.google.com/open?id=130T5VFkt-OtwhSlpBuaiz4_FEF2QOgyP
+
+In my modification, I changed quite a bit. I left the tutorial particle attached to the kart near the rear wheels. I changed the base track quite a bit, added a bunch of extra track segments, and put in a few jumps. I also moved the collectable rings around, and gave them each a particle effect that radiates out from their center. 
+In addition, I changed the skybox, and the sun to be more reminiscent of a night sky. I used the star skybox from https://assetstore.unity.com/packages/3d/environments/sci-fi/real-stars-skybox-lite-116333 as my new skybox, and manually edited the light emitting from the moon to make it feel more night time ish. I also had to move a bunch of rocks and trees aside but those were for the most part trivial. I had a lot of fun experimenting with fun particle effects in this lab.
