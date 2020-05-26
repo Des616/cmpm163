@@ -91,14 +91,12 @@ public class buildCity : MonoBehaviour
          				Instantiate(pond,new Vector3(pos.x,pos.y+0.1f,pos.z), Quaternion.identity);
         			}
        			}
-       			else if(result < 71){
-        			Instantiate(buildings[5],pos,Quaternion.identity);
-       			}
-       			else if(result < 80){
+       			
+       			else if(result < 72){
         			Instantiate(buildings[6],pos,Quaternion.identity);
        			}
        			else {
-	       			Instantiate(buildings[7],pos,Quaternion.identity);
+	       			Instantiate(buildings[8],pos,Quaternion.identity);
 	       			
       			}
       			
